@@ -1,6 +1,6 @@
 // custom fetch for api
 
-import { LOCALSTORAGE_TOKEN_KEY } from "../src/utils";
+import {API_URLS, LOCALSTORAGE_TOKEN_KEY } from "../utils";
 
 const customFetch = async(url,{body,...customConfig}) =>{
     /*
@@ -43,7 +43,7 @@ const customFetch = async(url,{body,...customConfig}) =>{
     try{
      const response = await fetch(url,config);
      const data = await response.json();
-     if(response.success){
+     if(data.success){
          return{
              data: data.data,
              success: true
@@ -61,10 +61,12 @@ const customFetch = async(url,{body,...customConfig}) =>{
 };
 
 
-const getPosts=(page,limit)=>{
+export const getPosts=(page =1,limit=5)=>{
 
     // page : page no , limit tells how many posts we want api to fetch for us at once
 
-    return customFetch()
+    return customFetch(API_URLS.posts(page,limit),{
+        method:'GET',
+    });
 
 }
