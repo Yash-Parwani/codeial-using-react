@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import {getPosts} from "../api"
 
-import {Loader} from "./index"
+import {Loader,Navbar} from "./index"
 import {Home} from "../pages/Home"
 
 function App() {
@@ -40,6 +40,7 @@ function App() {
 
   return (
     <div className="App">
+      <Navbar />
        {/* sending the posts as props so that we can display it */}
        <Home posts={posts}/>
     </div>
