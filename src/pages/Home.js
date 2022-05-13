@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 
 import { Comment } from '../components';
 import styles from '../styles/home.module.css';
+import {Link} from 'react-router-dom'
 
 const Home = ({ posts }) => {
   console.log(posts);
