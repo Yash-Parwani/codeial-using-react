@@ -70,3 +70,13 @@ export const getPosts=(page =1,limit=5)=>{
     });
 
 }
+
+
+// creating a log in api function
+
+export const login = (email,password) =>{
+    return customFetch(API_URLS.login(),{
+        method:'POST',
+        body: {email,password}
+    })
+}

@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import styles from '../styles/login.module.css';
 
-
 // importing useToasts to show notifications
 import { useToasts } from 'react-toast-notifications';
+
+// importing login from api
+
+import { login } from '../api';
 const Login = () => {
   // we will require state for email as well as password as well as login
 
@@ -12,35 +15,56 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loggingin, setLoggingin] = useState('');
-  const {addToast} = useToasts
+  const { addToast } = useToasts;
 
-  const handleSubmit= (event) =>{
-      // removing default submission of form since we dont want our page to be reloaded when form is getting submitted
+  const handleSubmit = async (event) => {
+    // removing default submission of form since we dont want our page to be reloaded when form is getting submitted
 
-      event.preventDefault();
+    event.preventDefault();
+
+    // setting logging in as true
+    setLoggingin(true);
+
+    // checking if user has written email or password or has submitted blank form
+
+    if (!email || !password) {
+      // showing error notification
+      return addToast('Please enter both email and password', {
+        appearence: 'error',
+      });
+    }
+
+    // loggin in inside api
+
+    const response = await login(email, password);
+
+    if (response.success) {
+      // show success notification
+      addToast('Successfully logged in', {
+        appearence: 'success',
+      });
+    } else {
+       addToast(response.message, {
+        appearence: 'error',
+      });
+    }
 
 
 
-      // setting logging in as true
-      setLoggingin(true);
-
-
-      // checking if user has written email or password or has submitted blank form
-
-      if (!email || !password){
-        // showing error notification
-          return addToast('Please enter both email and password',{
-              appearence: 'error',
-          });
-      }
-  }
+    setLoggingin(false);
+  };
   return (
     //   handling form submit so that it does not submit automatically causing a re-render
     // we will be handling the submit all by ourselves
     <form className={styles.loginForm} onSubmit={handleSubmit}>
       <span className={styles.loginSignupHeader}>Log in</span>
       <div className={styles.field}>
-        <input type="email" placeholder="Email" required value={email} onChange={(event) =>{
+        <input
+          type="email"
+          placeholder="Email"
+          required
+          value={email}
+          onChange={(event) => {
             /* on change will be called when user types .
 
              As user types value of email updates so we would want to set Its value as well
@@ -48,12 +72,18 @@ const Login = () => {
 
 
             */
-              setEmail(event.target.value);
-        }} />
+            setEmail(event.target.value);
+          }}
+        />
       </div>
 
       <div className={styles.field}>
-        <input type="password" placeholder="Password" required  value={password} onChange={(event) =>{
+        <input
+          type="password"
+          placeholder="Password"
+          required
+          value={password}
+          onChange={(event) => {
             /* on change will be called when user types .
 
              As user types value of email updates so we would want to set Its value as well
@@ -61,11 +91,12 @@ const Login = () => {
 
 
             */
-              setPassword(event.target.value);
-        }}/>
+            setPassword(event.target.value);
+          }}
+        />
       </div>
-      <div className={styles.field} disabled={loggingin}>
-        <button>
+      <div className={styles.field}>
+        <button disabled={loggingin}>
           {/* if logging in is true means user has clicked Login button so we will disable it
             
             it will help us because say user paagal ho gaya or continuously click karte gaya button ko
@@ -73,6 +104,9 @@ const Login = () => {
 
             so here we will be calling only once with help of logging in so that only one api request call is made
             
+
+
+            so disabled attribute helps us to achieve that
             */}
           {loggingin ? 'Logging in...' : 'Login'}
         </button>
