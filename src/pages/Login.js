@@ -1,27 +1,20 @@
-import styles from "../styles/login.module.css"
-const Login = () =>{
-    return (
-           <form className={styles.loginForm}>
+import styles from '../styles/login.module.css';
+const Login = () => {
+  return (
+    <form className={styles.loginForm}>
+      <span className={styles.loginSignupHeader}>Log in</span>
+      <div className={styles.field}>
+        <input type="email" placeholder="Email" required />
+      </div>
 
-         <span className={styles.loginSignupHeader} >Log in</span>
-          <div className={styles.field}>
-               <input type='email' placeholder="Email" required />
-        </div>
+      <div className={styles.field}>
+        <input type="password" placeholder="Password" required />
+      </div>
+      <div className={styles.field}>
+        <button>Login</button>
+      </div>
+    </form>
+  );
+};
 
-               <div className={styles.field}>
-               <input type='password' placeholder="Password" required />
-               </div>
-               <div className={styles.field}>
-                   <button>
-                       Login
-                   </button>
-               </div>
-
-
-           </form>
-
-    );
-
-}
-
-export default Login
+export default Login;
