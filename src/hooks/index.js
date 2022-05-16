@@ -2,6 +2,7 @@ import { useContext, useState } from "react"
 import { login as userLogin} from '../api'
 
 import {AuthContext} from '../providers/AuthProvider'
+import { setItemInLocalStorage,LOCALSTORAGE_TOKEN_KEY, removeItemFromLocalStorage } from "../utils"
 export const useAuth = () =>{
     return useContext(AuthContext)
 }
@@ -22,6 +23,8 @@ export const useProvideAuth = () =>{
            // usser is logged in successfully so set success = true
            // and also setUser to the logged in user
            setUser(response.data.user);
+           //setting tokein in local storage
+           setItemInLocalStorage(LOCALSTORAGE_TOKEN_KEY,response.data.token ? response.data.toke : null)
           return{
               success : true,
             } 
@@ -38,6 +41,7 @@ export const useProvideAuth = () =>{
 
     const logout = () =>{
         setUser(null);
+        removeItemFromLocalStorage(LOCALSTORAGE_TOKEN_KEY);
     };
 
 
