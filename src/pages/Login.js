@@ -7,6 +7,7 @@ import { useToasts } from 'react-toast-notifications';
 // importing login from api
 
 import { login } from '../api';
+import {useAuth} from '../hooks'
 const Login = () => {
   // we will require state for email as well as password as well as login
 
@@ -17,6 +18,10 @@ const Login = () => {
   const [loggingin, setLoggingin] = useState('');
   const { addToast } = useToasts;
 
+  const auth = useAuth();
+
+  // console logging
+  console.log(auth);
   const handleSubmit = async (event) => {
     // removing default submission of form since we dont want our page to be reloaded when form is getting submitted
 
@@ -36,10 +41,11 @@ const Login = () => {
 
     // loggin in inside api
 
-    const response = await login(email, password);
+    const response = await auth.login(email, password);
 
     if (response.success) {
       // show success notification
+
       addToast('Successfully logged in', {
         appearence: 'success',
       });
