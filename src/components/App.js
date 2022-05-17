@@ -5,6 +5,7 @@ import { Loader, Navbar } from './index';
 import { Home, Login } from '../pages/Home';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { useAuth } from '../hooks';
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -15,16 +16,17 @@ function App() {
 
 
   */
-  const [loading, setLoading] = useState(true);
+  const auth =useAuth();
+  /*
   useEffect(() => {
     const fetchPosts = async () => {
       const response = await getPosts();
       // lets log the responses
       console.log('response', response);
-      /* after fetching posts , we need to save it in the post state 
+       after fetching posts , we need to save it in the post state 
          it should be done only if the response.success is true i.e we found respponse and there is no error in it
 
-         */
+         
       if (response.success) {
         setPosts(response.data.posts);
       }
@@ -32,10 +34,10 @@ function App() {
       setLoading(false);
     };
     fetchPosts();
-  }, []);
+  }, []); */
 
   // loader to be shown  till we are fetching data from api
-  if (loading) {
+  if (auth. loading) {
     return <Loader />;
   }
 
