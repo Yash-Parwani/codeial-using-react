@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { getPosts } from '../api';
 
 import { Loader, Navbar } from './index';
-import { Home, Login } from '../pages/Home';
+import { Home, Login ,Signup , Settings } from '../pages/Home';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useAuth } from '../hooks';
-import Signup from '../pages/Signup';
+
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -59,6 +59,9 @@ function App() {
 
           <Route exact path="/register">
             <Signup />
+          </Route>
+          <Route exact path="/settings">
+            <Settings />
           </Route>
 
 
