@@ -17,7 +17,9 @@ const initialState = {
 
     },
     // if the user is being currently proccessed or not is represented by loading field
-    loading: true
+    loading: true,
+
+    signup: () => {},
 }
 
 export const AuthContext = createContext(initialState);

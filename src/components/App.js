@@ -6,6 +6,7 @@ import { Home, Login } from '../pages/Home';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useAuth } from '../hooks';
+import Signup from '../pages/Signup';
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -54,6 +55,12 @@ function App() {
           <Route exact path="/login">
             <Login />
           </Route>
+
+
+          <Route exact path="/register">
+            <Signup />
+          </Route>
+
 
 
           {/* if no matching route than render 404 */}
