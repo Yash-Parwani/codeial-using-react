@@ -89,3 +89,11 @@ export const register = async (name, email, password, confirmPassword) => {
     });
   };
   
+// updating user profile call
+export const editProfile = async (userId, name, password, confirmPassword) => {
+    return customFetch(API_URLS.editUser(), {
+      method: 'POST',
+      body: { id : userId ,name, password, confirm_password: confirmPassword },
+    });
+  };
+  
