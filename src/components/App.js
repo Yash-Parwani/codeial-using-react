@@ -4,9 +4,28 @@ import { getPosts } from '../api';
 import { Loader, Navbar } from './index';
 import { Home, Login ,Signup , Settings } from '../pages/Home';
 
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes,Redirect } from 'react-router-dom';
 import { useAuth } from '../hooks';
+import {Loader,Navbar} from './'
+import 
+function PrivateRoute({children, ...rest} ){
 
+  const auth = useAuth()
+  return <Route {...rest} render={() =>{
+    //  if user is logged in than show whatever children is comming
+    if(auth.user){
+      // by children it means say when we click settings button so settings component/ page is the children , so render settings if user is logged in
+      return children;
+    }
+    else{
+      // if user is not logged in , than redirect
+
+      return <Redirect to='/login' />
+    }
+
+
+  }}/>
+}
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -60,9 +79,9 @@ function App() {
           <Route exact path="/register">
             <Signup />
           </Route>
-          <Route exact path="/settings">
+          <PrivateRoute exact path="/settings">
             <Settings />
-          </Route>
+          </PrivateRoute>
 
 
 
