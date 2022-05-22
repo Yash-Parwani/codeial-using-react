@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { useToasts } from 'react-toast-notifications';
 
@@ -60,6 +61,21 @@ const Signup = () => {
 
     setSigningUp(false);
   };
+/*
+   if user is logged in , so we should not show him the signup page
+   so in that case when user is logged in , we will redirect the user to home page
+
+
+   how to know if user is logged in or not
+
+   well auth.user will tell us whether user is logged in or not
+
+*/
+
+if(auth.user){
+  return <Redirect to ='/' />
+}
+
 
   return (
     <form className={styles.loginForm} onSubmit={handleFormSubmit}>

@@ -7,6 +7,8 @@ import { useToasts } from 'react-toast-notifications';
 // importing login from api
 
 import { login } from '../api';
+
+import {Redirect} from 'react-router-dom'
 import {useAuth} from '../hooks'
 const Login = () => {
   // we will require state for email as well as password as well as login
@@ -59,6 +61,20 @@ const Login = () => {
 
     setLoggingin(false);
   };
+  /*
+   if user is logged in , so we should not show him the login page
+   so in that case when user is logged in , we will redirect the user to home page
+
+
+   how to know if user is logged in or not
+
+   well auth.user will tell us whether user is logged in or not
+
+*/
+
+if(auth.user){
+  return <Redirect to ='/' />
+}
   return (
     //   handling form submit so that it does not submit automatically causing a re-render
     // we will be handling the submit all by ourselves
