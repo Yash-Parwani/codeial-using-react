@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { getPosts } from '../api';
 
 import { Loader, Navbar } from './index';
-import { Home, Login ,Signup , Settings } from '../pages/Home';
+import { Home, Login ,Signup , Settings ,UserProfile} from '../pages/Home';
 
 import { BrowserRouter as Router, Route, Routes,Redirect } from 'react-router-dom';
 import { useAuth } from '../hooks';
@@ -81,6 +81,10 @@ function App() {
           </Route>
           <PrivateRoute exact path="/settings">
             <Settings />
+          </PrivateRoute>
+          // only signed in users will be able to view their profile
+          <PrivateRoute exact path="/user/:userId">
+            <UserProfile  />
           </PrivateRoute>
 
 

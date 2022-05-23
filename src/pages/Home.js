@@ -17,7 +17,13 @@ const Home = ({ posts }) => {
                 alt="user-pic"
               />
               <div>
-                <span className={styles.postAuthor}>{post.user.name}</span>
+                {/* using string interpolation so that we are able to add user id
+                   post.user._id will give us id of the current user who is logged in
+
+
+                   So we will show current users profile only
+                */}
+                <Link to={`/user/${post.user._id}`} className={styles.postAuthor}>{post.user.name}</Link>
                 <span className={styles.postTime}>a minute ago</span>
               </div>
             </div>
