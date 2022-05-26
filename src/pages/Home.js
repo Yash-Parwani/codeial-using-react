@@ -23,7 +23,19 @@ const Home = ({ posts }) => {
 
                    So we will show current users profile only
                 */}
-                <Link to={`/user/${post.user._id}`} className={styles.postAuthor}>{post.user.name}</Link>
+                <Link
+                //  to={`/user/${post.user._id}`}  here we were passsing only path 
+
+                // we will pass an object to 'to" attribute which will contain user data
+                to={{
+                  pathname : `/user/${post.user._id}`,
+                  // passing user info via state to User Profile component
+                  state:{
+                          user: post.user,
+                  }
+
+                }}
+                className={styles.postAuthor}>{post.user.name}</Link>
                 <span className={styles.postTime}>a minute ago</span>
               </div>
             </div>

@@ -1,11 +1,16 @@
 import { useState } from 'react';
 import { useToasts } from 'react-toast-notifications';
 
+
+import { useLocation } from 'react-router-dom';
+
 import styles from '../styles/settings.module.css';
 import { useAuth } from '../hooks';
 
 const UserProfile = () => {
-  const user = {};
+  const location = useLocation();
+  console.log('location' , location);
+  const {user = {}} = location.state;
 
   return (
     <div className={styles.settings}>
@@ -18,13 +23,13 @@ const UserProfile = () => {
 
       <div className={styles.field}>
         <div className={styles.fieldLabel}>Email</div>
-        <div className={styles.fieldValue}>{user?.email}</div>
+        <div className={styles.fieldValue}>{user.email}</div>
       </div>
 
       <div className={styles.field}>
         <div className={styles.fieldLabel}>Name</div>
 
-        <div className={styles.fieldValue}>{user?.name}</div>
+        <div className={styles.fieldValue}>{user.name}</div>
       </div>
 
       <div className={styles.btnGrp}>
