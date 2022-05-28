@@ -106,4 +106,10 @@ export const editProfile = async (userId, name, password, confirmPassword) => {
     
     })
 }
+  export const fetchUserFriends = () =>{
+    return customFetch(API_URLS.friends(),{
+        method:'GET'
+    
+    })
+}
   
